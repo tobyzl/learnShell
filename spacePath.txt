@@ -1,8 +1,21 @@
-1.ȥ��·���еĿո񣬸ı�IFS�����Լ��ɡ�
+1.È¥µôÂ·¾¶ÖÐµÄ¿Õ¸ñ£¬¸Ä±äIFSµÄÊôÐÔ¼´¿É¡£
 SAVEIFS=$IFS
 IFS=$'\n'
 ...
 ...
-IFS=SAVEIFS // ����д��󣬻�ԭ��ʼʱ������
+IFS=SAVEIFS // ´úÂëÐ´Íêºó£¬»¹Ô­¿ªÊ¼Ê±µÄÊôÐÔ
 
 
+
+ file=/dir1/dir2/dir3/my.file.txt
+ 可以用${ }分别替换得到不同的值：
+
+复制代码 代码如下:
+ ${file#*/}：删掉第一个 / 及其左边的字符串：dir1/dir2/dir3/my.file.txt
+ ${file##*/}：删掉最后一个 /  及其左边的字符串：my.file.txt
+ ${file#*.}：删掉第一个 .  及其左边的字符串：file.txt
+ ${file##*.}：删掉最后一个 .  及其左边的字符串：txt
+ ${file%/*}：删掉最后一个  /  及其右边的字符串：/dir1/dir2/dir3
+ ${file%%/*}：删掉第一个 /  及其右边的字符串：(空值)
+ ${file%.*}：删掉最后一个  .  及其右边的字符串：/dir1/dir2/dir3/my.file
+ ${file%%.*}：删掉第一个  .   及其右边的字符串：/dir1/dir2/dir3/my
