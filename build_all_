@@ -1,0 +1,56 @@
+#!/bin/sh
+
+cd `dirname $0`; 
+
+function startbuild
+{
+
+echo
+echo "                                                 PAD7.0"
+echo "     |------------------------------------------------------------------------------|"
+echo "     |                                                                              |"
+echo "     |\033[31m 1:更新 \033[0m  |  \033[32m 2:编译 \033[0m  |  \033[35m 3:deployall \033[0m  |  \033[34m 4:make_mpkg \033[0m  |  \033[33m 5:全部重新编译 \033[0m|"
+echo "     |                                                                              |"
+echo "     |------------------------------------------------------------------------------|"
+echo
+}
+
+function choice
+{
+read -p "输入你要编译的数字:"  result
+if [ "1" = "$result" ];then
+sh update_all.sh
+startbuild
+choice
+elif [ "2" = "$result" ];then
+sh build_all.sh
+startbuild
+choice
+elif [ "3" = "$result" ];then
+sh deploy_all.sh
+startbuild
+choice
+elif [ "4" = "$result" ];then
+sh make_mpkg.sh
+startbuild
+choice
+elif [ "5" = "$result" ];then
+sh update_all.sh
+sh mac_create_qrc.sh
+sh build_all.sh
+sh deploy_all.sh
+sh make_mpkg.sh
+startbuild
+choice
+elif [ "0" = "$result" ];then
+exit 0
+else
+startbuild
+choice
+fi
+}
+
+startbuild
+choice
+
+
